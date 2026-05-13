@@ -55,3 +55,31 @@ def show_dashboard():
 
     else:
         st.success("No follow-ups due.")
+
+    st.subheader("Pipeline Analytics")
+
+    status_counts = {}
+
+    for client in clients:
+
+     if client.status in status_counts:
+        status_counts[client.status] += 1
+
+    else:
+        status_counts[client.status] = 1
+
+    df = pd.DataFrame({
+    "Status": list(status_counts.keys()),
+    "Count": list(status_counts.values())
+   })
+
+    fig = px.pie(
+    df,
+    names="Status",
+    values="Count",
+    title="Client Pipeline"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+    
