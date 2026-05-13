@@ -1,0 +1,15 @@
+credentials:
+  usernames:
+    admin:
+      email: admin@gmail.com
+      name: Admin User
+      password: admin123
+
+cookie:
+  expiry_days: 30
+  key: client_crm_key
+  name: client_crm_cookie
+
+preauthorized:
+  emails:
+    - admin@gmail.com

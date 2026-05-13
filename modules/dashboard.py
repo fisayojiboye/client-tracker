@@ -1,6 +1,8 @@
 import streamlit as st
 from datetime import date
 from database import SessionLocal, Client
+import plotly.express as px
+import pandas as pd
 
 session = SessionLocal()
 
