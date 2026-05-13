@@ -1,14 +1,13 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
-from sqlalchemy import Date
 
-# Create database engine
+# Database Engine
 engine = create_engine("sqlite:///clients.db")
 
-# Create base class
+# Base Class
 Base = declarative_base()
 
-# Create session
+# Session
 SessionLocal = sessionmaker(bind=engine)
 
 
@@ -17,12 +16,19 @@ class Client(Base):
     __tablename__ = "clients"
 
     id = Column(Integer, primary_key=True, index=True)
+
     company_name = Column(String)
     contact_person = Column(String)
+
     phone = Column(String)
     email = Column(String)
+
     status = Column(String)
+
     last_contact = Column(String)
+    next_follow_up = Column(String)
+
+    notes = Column(String)
 
 
 # Create tables
