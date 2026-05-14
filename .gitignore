@@ -1,5 +1,32 @@
+# Python cache
 __pycache__/
 *.pyc
-clients.db
-.env
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Streamlit cache
 .streamlit/
+
+# Database
+*.db
+clients.db
+
+# Excel exports
+*.xlsx
+
+# Environment variables
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

@@ -1,5 +1,8 @@
 import streamlit as st
 from database import SessionLocal, Client
+from utils.ai_tools import generate_followup
+from utils.clare_api import generate_clean_excel
+from database import Activity
 
 session = SessionLocal()
 
@@ -122,8 +125,44 @@ def show_manage_clients():
                 ):
 
                     session.delete(client)
+                    activity = Activity(
+                    client_name=company_name,
+                    action="Client Added",
+                    timestamp=str(datetime.now())
+                )
+
+                    session.add(activity)
                     session.commit()
 
                     st.warning("Deleted")
 
                     st.rerun()
+
+                if st.button(
+                    "Generate AI Follow-Up",
+                    key=f"ai{client.id}"
+                ):
+
+                    ai_message = generate_followup(
+                    client.company_name,
+                    client.status
+                )
+
+                    st.info(ai_message)
+                
+                # GENERATE CLEAN EXCEL
+                if st.button(
+                     "Generate Clean Excel",
+                     key=f"excel{client.id}"
+            ):
+
+                     file_name = generate_clean_excel(client)
+
+                     with open(file_name, "rb") as file:
+
+                         st.download_button(
+                             label="Download Clean Excel",
+                             data=file,
+                             file_name=file_name,
+                             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                         )

@@ -3,6 +3,7 @@ from datetime import date
 from database import SessionLocal, Client
 import plotly.express as px
 import pandas as pd
+from database import Activity
 
 session = SessionLocal()
 
@@ -81,5 +82,24 @@ def show_dashboard():
     )
 
     st.plotly_chart(fig, use_container_width=True)
+
+    st.divider()
+
+st.subheader("Recent Activities")
+
+activities = (
+    session.query(Activity)
+    .order_by(Activity.id.desc())
+    .limit(10)
+    .all()
+)
+
+for activity in activities:
+
+    st.write(
+        f"{activity.timestamp} - "
+        f"{activity.client_name} - "
+        f"{activity.action}"
+    )
 
     

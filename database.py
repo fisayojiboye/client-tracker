@@ -30,6 +30,17 @@ class Client(Base):
 
     notes = Column(String)
 
+class Activity(Base):
+    __tablename__ = "activities"
+
+    id = Column(Integer, primary_key=True)
+
+    client_name = Column(String)
+
+    action = Column(String)
+
+    timestamp = Column(String)
+
 
 # Create tables
 Base.metadata.create_all(bind=engine)
